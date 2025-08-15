@@ -43,7 +43,9 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get("/api/profile");
+      const response = await axios.get(
+        "https://careerfind-riseos.onrender.com/api/profile"
+      );
       const data = response.data;
       setProfileData(data);
       setSkills(data.profile?.skills || []);
@@ -74,7 +76,10 @@ const Profile = () => {
         },
       };
 
-      await axios.put("/api/profile", updateData);
+      await axios.put(
+        "https://careerfind-riseos.onrender.com/api/profile",
+        updateData
+      );
       setSuccess("Profile updated successfully!");
       toast.success("Profile updated");
       fetchProfile();
@@ -94,9 +99,13 @@ const Profile = () => {
     if (resumeFile) formData.append("resume", resumeFile);
 
     try {
-      await axios.post("/api/profile/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://careerfind-riseos.onrender.com/api/profile/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setSuccess("File uploaded successfully!");
       toast.success("File uploaded!");
       fetchProfile();
@@ -128,7 +137,10 @@ const Profile = () => {
       }
 
       if (address) {
-        await axios.post("/api/profile/connect-wallet", { network, address });
+        await axios.post(
+          "https://careerfind-riseos.onrender.com/api/profile/connect-wallet",
+          { network, address }
+        );
         setSuccess(`${network} wallet connected successfully!`);
         console.log("address", address);
         console.log("profile", profileData);
@@ -143,7 +155,10 @@ const Profile = () => {
 
   const disconnectWallet = async (network) => {
     try {
-      await axios.post("/api/profile/disconnect-wallet", { network });
+      await axios.post(
+        "https://careerfind-riseos.onrender.com/api/profile/disconnect-wallet",
+        { network }
+      );
       disconnect();
       setSuccess(`${network} wallet disconnected successfully!`);
       fetchProfile();

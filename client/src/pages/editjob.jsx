@@ -25,7 +25,9 @@ const EditJob = () => {
   useEffect(() => {
     const fetchJob = async () => {
       try {
-        const response = await axios.get(`/api/jobs/${id}`);
+        const response = await axios.get(
+          `https://careerfind-riseos.onrender.com/api/jobs/${id}`
+        );
         const job = response.data;
 
         setValue("title", job.title);

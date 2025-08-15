@@ -33,7 +33,9 @@ export const useJobStore = create((set, get) => ({
       if (filters.tags.length > 0)
         params.append("tags", filters.tags.join(","));
 
-      const response = await axios.get(`/api/jobs?${params}`);
+      const response = await axios.get(
+        `https://careerfind-riseos.onrender.com/api/jobs?${params}`
+      );
       const { jobs: newJobs, hasMore } = response.data;
 
       set({
@@ -50,7 +52,10 @@ export const useJobStore = create((set, get) => ({
 
   createJob: async (jobData) => {
     try {
-      const response = await axios.post("/api/jobs", jobData);
+      const response = await axios.post(
+        "https://careerfind-riseos.onrender.com/api/jobs",
+        jobData
+      );
       set((state) => ({
         jobs: [response.data, ...state.jobs],
       }));
@@ -61,7 +66,10 @@ export const useJobStore = create((set, get) => ({
 
   updateJob: async (id, jobData) => {
     try {
-      const response = await axios.put(`/api/jobs/${id}`, jobData);
+      const response = await axios.put(
+        `https://careerfind-riseos.onrender.com/api/jobs/${id}`,
+        jobData
+      );
       set((state) => ({
         jobs: state.jobs.map((job) => (job._id === id ? response.data : job)),
       }));
@@ -72,7 +80,9 @@ export const useJobStore = create((set, get) => ({
 
   deleteJob: async (id) => {
     try {
-      await axios.delete(`/api/jobs/${id}`);
+      await axios.delete(
+        `https://careerfind-riseos.onrender.com/api/jobs/${id}`
+      );
       set((state) => ({
         jobs: state.jobs.filter((job) => job._id !== id),
       }));

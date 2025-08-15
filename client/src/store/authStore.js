@@ -21,10 +21,13 @@ export const useAuthStore = create(
         set({ is_loggingin: true });
         console.log(email, password);
         try {
-          const response = await axios.post("/api/auth/login", {
-            email,
-            password,
-          });
+          const response = await axios.post(
+            "https://careerfind-riseos.onrender.com/api/auth/login",
+            {
+              email,
+              password,
+            }
+          );
           console.log(response);
           const { user, token } = response.data;
           set({ user, token });
@@ -40,11 +43,14 @@ export const useAuthStore = create(
       register: async (name, email, password) => {
         try {
           set({ is_signingup: true });
-          const response = await axios.post("/api/auth/register", {
-            name,
-            email,
-            password,
-          });
+          const response = await axios.post(
+            "https://careerfind-riseos.onrender.com/api/auth/register",
+            {
+              name,
+              email,
+              password,
+            }
+          );
           const { user, token } = response.data;
           set({ user, token, is_signingup: false, is_userlogged: true });
           axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -58,7 +64,9 @@ export const useAuthStore = create(
 
       logout: async () => {
         try {
-          const response = await axios.post("/api/auth/logout");
+          const response = await axios.post(
+            "https://careerfind-riseos.onrender.com/api/auth/logout"
+          );
           console.log(response);
           set({ user: null, token: null });
           delete axios.defaults.headers.common["Authorization"];

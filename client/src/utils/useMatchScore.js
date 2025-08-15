@@ -14,9 +14,12 @@ export default function useMatchScore({ jobId, userId }) {
       setLoading(true);
       setError("");
       try {
-        const { data } = await axios.get("/api/match-score", {
-          params: { jobId, userId },
-        });
+        const { data } = await axios.get(
+          "https://careerfind-riseos.onrender.com/api/match-score",
+          {
+            params: { jobId, userId },
+          }
+        );
         if (!cancelled) setScore(data.score);
       } catch (e) {
         if (!cancelled) setError("Could not compute match score");

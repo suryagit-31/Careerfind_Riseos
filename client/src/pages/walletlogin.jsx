@@ -32,9 +32,12 @@ const WalletLogin = () => {
       }
 
       // Get nonce for signing
-      const nonceResponse = await axios.post("/api/web3/wallet-nonce", {
-        address,
-      });
+      const nonceResponse = await axios.post(
+        "https://careerfind-riseos.onrender.com/api/web3/wallet-nonce",
+        {
+          address,
+        }
+      );
       const { message } = nonceResponse.data;
 
       // Sign message
@@ -54,12 +57,15 @@ const WalletLogin = () => {
       }
 
       // Authenticate with backend
-      const authResponse = await axios.post("/api/web3/wallet-login", {
-        address,
-        signature,
-        message,
-        network,
-      });
+      const authResponse = await axios.post(
+        "https://careerfind-riseos.onrender.com/api/web3/wallet-login",
+        {
+          address,
+          signature,
+          message,
+          network,
+        }
+      );
 
       const { user, token } = authResponse.data;
 
